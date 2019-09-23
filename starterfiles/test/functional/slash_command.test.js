@@ -25,8 +25,8 @@ describe('Starter Test', () => {
     it('should go to slack workspace and sign in', async () => {
       // Log in
       await page.goto('https://spec-test-conf.slack.com');
-      await expect(page).toFill('input[id="email"]', '', { timeout: TIMEOUT });
-      await expect(page).toFill('input[id="password"]', '', { timeout: TIMEOUT });
+      await expect(page).toFill('input[id="email"]', process.env.email, { timeout: TIMEOUT });
+      await expect(page).toFill('input[id="password"]', process.env.password, { timeout: TIMEOUT });
       await expect(page).toClick('button[id="signin_btn"]', { timeout: TIMEOUT });
 
       // Click on Bot in side bar
@@ -37,9 +37,9 @@ describe('Starter Test', () => {
       expect(await page.title()).toBe('Slack | Spec Tester | Spec');
     }, TIMEOUT);
 
-    it('should test /test_one and verify the bot responds properly', async() => {
+    it('should test /test_slash_command and verify the bot responds properly', async() => {
         // Execute Slash Command
-        await expect(page).toFill('div[data-qa="message_input"]', '/test_one', { timeout: TIMEOUT });
+        await expect(page).toFill('div[data-qa="message_input"]', '/test_slash_command', { timeout: TIMEOUT });
         await page.keyboard.press('Enter');
         await page.keyboard.press('Enter');
 

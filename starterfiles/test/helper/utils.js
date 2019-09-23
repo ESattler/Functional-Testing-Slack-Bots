@@ -10,7 +10,7 @@ async function getDMHistory() {
     },
     uri: 'https://slack.com/api/im.history',
     qs: {
-      token: '',
+      token: process.env.token,
       channel: 'DN68ND4JZ',
       count: 1000
     }
@@ -28,7 +28,7 @@ async function deleteMessage(ts) {
     },
     uri: 'https://slack.com/api/chat.delete',
     qs: {
-      token: '',
+      token: process.env.token,
       channel: 'DN68ND4JZ',
       ts
     }

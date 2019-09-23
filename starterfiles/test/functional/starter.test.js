@@ -22,8 +22,8 @@ describe('Starter Test', () => {
     it('should go to slack workspace and sign in', async () => {
       // Log in
       await page.goto('https://spec-test-conf.slack.com');
-      await expect(page).toFill('input[id="email"]', '', { timeout: TIMEOUT });
-      await expect(page).toFill('input[id="password"]', '', { timeout: TIMEOUT });
+      await expect(page).toFill('input[id="email"]', process.env.email, { timeout: TIMEOUT });
+      await expect(page).toFill('input[id="password"]', process.env.password, { timeout: TIMEOUT });
       await expect(page).toClick('button[id="signin_btn"]', { timeout: TIMEOUT });
 
       // Click on Bot in side bar
