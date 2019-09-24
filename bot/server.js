@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const request = require("request");
+const request = require('request');
 const { WebClient } = require('@slack/web-api');
 
 // Creates express app
@@ -26,36 +26,40 @@ app.post('/test_slash_command', async (req, res) => {
 
 app.post('/test_dialog', async (req, res) => {
   const web = new WebClient(process.env.SLACK_AUTH_TOKEN);
+  console.log(req.body);
   const options = {
-    callback_id: 'dialog',
-    title: 'Spec 2019',
-    elements: [
-      {
-          type: 'text',
-          label: 'Text Element',
-          name: 'text_element'
-      },
-      {
-        type: 'textarea',
-        label: 'Textarea Element',
-        name: 'textarea_element'
-      },
-      {
-        type: 'select',
-        label: 'Select Element',
-        name: 'select_element',
-        options: [
-          {
-            label: 'option 1',
-            value: 'option_1',
-          },
-          {
-            label: 'option 2',
-            label: 'option_2'
-          }
-        ]
-      }
-    ]
+    dialog: {
+      callback_id: 'dialog',
+      title: 'Spec 2019',
+      elements: [
+        {
+            type: 'text',
+            label: 'Text Element',
+            name: 'text_element'
+        },
+        {
+          type: 'textarea',
+          label: 'Textarea Element',
+          name: 'textarea_element'
+        },
+        {
+          type: 'select',
+          label: 'Select Element',
+          name: 'select_element',
+          options: [
+            {
+              label: 'option 1',
+              value: 'option_1',
+            },
+            {
+              label: 'option 2',
+              value: 'option_2'
+            }
+          ]
+        }
+      ]
+    },
+    trigger_id: req.body.trigger_id
   }
   await web.dialog.open(options);
   res.json();
@@ -64,20 +68,20 @@ app.post('/test_dialog', async (req, res) => {
 app.post('/test_button', async (req, res) => {
   const web = new WebClient(process.env.SLACK_AUTH_TOKEN);
   await web.chat.postMessage({
-    "text": "Here is an example message with a button!",
-    "attachments": [
+    text: 'Here is an example message with a button!',
+    attachments: [
         {
-            "text": "BUTTONS:",
-            "fallback": "Something went horribly wrong",
-            "callback_id": "button_test",
-            "color": "#3AA3E3",
-            "attachment_type": "default",
-            "actions": [
+            text: 'BUTTONS:',
+            fallback: 'Something went horribly wrong',
+            callback_id: 'button_test',
+            color: '#3AA3E3',
+            attachment_type: 'default',
+            actions: [
                 {
-                    "name": "button",
-                    "text": "Click Me",
-                    "type": "button",
-                    "value": "foo"
+                    name: 'button',
+                    text: 'Click Me',
+                    type: 'button',
+                    value: 'foo'
                 }
             ]
         }
@@ -94,9 +98,15 @@ app.post('/interactive', async (req, res) => {
   const payload = JSON.parse(req.body.payload);
   console.log(payload);
   switch (payload.callback_id) {
-    case "button_test":
+    case 'button_test':
       await web.chat.postMessage({
         text: 'Good job pressing the button!',
+        channel: payload.channel.id,
+      });
+      break;
+    case 'dialog':
+      await web.chat.postMessage({
+        text: `You entered: ${payload.submission.text_element} | ${payload.submission.textarea_element} | ${payload.submission.select_element}`,
         channel: payload.channel.id,
       });
       break;
