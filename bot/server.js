@@ -24,6 +24,43 @@ app.post('/test_slash_command', async (req, res) => {
   res.json();
 });
 
+app.post('/test_dialog', async (req, res) => {
+  const web = new WebClient(process.env.SLACK_AUTH_TOKEN);
+  const options = {
+    callback_id: 'dialog',
+    title: 'Spec 2019',
+    elements: [
+      {
+          type: 'text',
+          label: 'Text Element',
+          name: 'text_element'
+      },
+      {
+        type: 'textarea',
+        label: 'Textarea Element',
+        name: 'textarea_element'
+      },
+      {
+        type: 'select',
+        label: 'Select Element',
+        name: 'select_element',
+        options: [
+          {
+            label: 'option 1',
+            value: 'option_1',
+          },
+          {
+            label: 'option 2',
+            label: 'option_2'
+          }
+        ]
+      }
+    ]
+  }
+  await web.dialog.open(options);
+  res.json();
+});
+
 app.post('/test_button', async (req, res) => {
   const web = new WebClient(process.env.SLACK_AUTH_TOKEN);
   await web.chat.postMessage({
