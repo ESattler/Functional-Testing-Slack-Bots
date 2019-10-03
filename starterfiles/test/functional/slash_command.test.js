@@ -44,6 +44,6 @@ describe('Starter Test', () => {
         await page.keyboard.press('Enter');
 
         //Validate Response
-        await expect(page).toMatch('Hello world!');
+        await expect(page).toMatch('Hello world!', { timeout: TIMEOUT });
     });
 })

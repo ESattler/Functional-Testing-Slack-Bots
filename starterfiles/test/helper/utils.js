@@ -1,41 +1,21 @@
-const rp = require('request-promise');
 const { WebClient } = require('@slack/web-api');
 
 async function getDMHistory() {
-  const options = {
-    method: 'POST',
-    json: true,
-    headers: {
-      'Content-type': 'application/json;charset=utf-8',
-    },
-    uri: 'https://slack.com/api/im.history',
-    qs: {
-      token: process.env.token,
-      channel: 'DN68ND4JZ',
-      count: 1000
-    }
-  }
-  const response = await rp(options);
+  const web = new WebClient(process.env.token);
+  const response = await web.im.history({
+    channel: 'DN68ND4JZ',
+    count: 1000
+  });
   return response.messages;
 }
 
 async function deleteMessage(ts) {
-  const options = {
-    method: 'POST',
-    json: true,
-    headers: {
-      'Content-type': 'application/json;charset=utf-8',
-    },
-    uri: 'https://slack.com/api/chat.delete',
-    qs: {
-      token: process.env.token,
-      channel: 'DN68ND4JZ',
-      ts
-    }
-  }
-  await rp(options);
+  const web = new WebClient(process.env.token);
+  const response = await web.chat.delete({
+    channel: 'DN68ND4JZ',
+    ts
+  }).catch(e => { });
 }
-
 
 async function cleanUp() {
     const history = await getDMHistory();
