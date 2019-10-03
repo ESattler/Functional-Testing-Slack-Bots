@@ -39,12 +39,23 @@ describe('Starter Test', () => {
 
     it('should test /test_modal and verify the bot responds properly', async() => {
       // Execute /test_modal
+      await expect(page).toFill('div[data-qa="message_input"]', '/test_modal', { timeout: TIMEOUT });
+      await page.keyboard.press('Enter');
+      await page.keyboard.press('Enter');
 
       // Fill in modal elements
+      await expect(page).toFill('input[id="single_line-single_line"]', 'First', { timeout: TIMEOUT });
+      await expect(page).toFill('textarea[id="multiline-multiline"]', 'Second', { timeout: TIMEOUT });
+
+      await page.keyboard.press('Tab');
+      await page.keyboard.type('Value 0')
+      await page.keyboard.press('Enter');
 
       // Submit Modal
+      await expect(page).toClick('button', { text: 'Submit', timeout: TIMEOUT });
 
       // Validate Bot response
+      await expect(page).toMatch('You entered: First | Second | Value 0', { timeout: TIMEOUT });
 
     });
 })

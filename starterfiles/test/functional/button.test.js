@@ -39,9 +39,17 @@ describe('Starter Test', () => {
 
     it('should test /test_button and verify the bot responds properly', async() => {
       // Execute /test_button
+      await expect(page).toFill('div[data-qa="message_input"]', '/test_button', { timeout: TIMEOUT });
+      await page.keyboard.press('Enter');
+      await page.keyboard.press('Enter');
+
+      //Validate Button Message Appeared
+      await expect(page).toMatch('Here is an example message with a button!', { timeout: TIMEOUT });
 
       // Click on button
+      await expect(page).toClick('button', { text: 'Click Me', timeout: TIMEOUT });
 
       // Validate Bot response
+      await expect(page).toMatch('Good job pressing the button!', { timeout: TIMEOUT });
     });
 })
