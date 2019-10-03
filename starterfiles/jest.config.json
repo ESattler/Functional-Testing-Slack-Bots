@@ -1,0 +1,5 @@
+{
+    "preset": "jest-puppeteer",
+    "setupFilesAfterEnv": ["expect-puppeteer"],
+    "testEnvironment": "node"
+}
