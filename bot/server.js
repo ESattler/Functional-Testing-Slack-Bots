@@ -147,7 +147,7 @@ app.post('/test_button', async (req, res) => {
             ]
         }
     ],
-    channel: req.body.event.channel,
+    channel: req.body.channel_id,
   });
   res.json();
 });
@@ -169,7 +169,7 @@ app.post('/interactive', async (req, res) => {
       console.log(payload.view.state);
       console.log(payload.view.state.values.select.select);
       await web.chat.postMessage({
-        text: `You entered: ${payload.view.state.values.single_line.single_line.value} | ${payload.view.state.values.multiline.multiline.value} | ${payload.view.state.values.select.select.selected_option.value}`,
+        text: `You entered: ${payload.view.state.values.single_line.single_line.value} | ${payload.view.state.values.multiline.multiline.value} | ${payload.view.state.values.select.select.selected_option.text.text}`,
         channel: payload.view.private_metadata,
       });
       break;
