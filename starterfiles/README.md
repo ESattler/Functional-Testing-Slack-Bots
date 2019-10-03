@@ -9,8 +9,9 @@ npm install
 ```
 This should also take care of installing chromium for you which is needed by puppeteer.
 
-Next, export your email/password to log into the Slack workspace.
+Next, export your email/password to log into the Slack workspace. You will also need to export a slack bot token.
 ```
+export token=xoxb-XXXXX
 export email=ENTER_YOUR_NAME
 export password=ENTER_YOUR_PASSWORD
 ```

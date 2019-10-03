@@ -14,7 +14,7 @@ Commands
 - Slash command which responds with a button that says `Click me!`
     - After the button is clicked, the bot responds with `Good job pressing the button!`
 
-`/test__modal`
+`/test_modal`
 - Slash command that opens a modal with a select menu, textbox, and textarea
 
 
