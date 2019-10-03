@@ -38,6 +38,10 @@ describe('Starter Test', () => {
     }, TIMEOUT);
 
     it('should test /test_button and verify the bot responds properly', async() => {
+      // Execute /test_button
 
+      // Click on button
+
+      // Validate Bot response
     });
 })

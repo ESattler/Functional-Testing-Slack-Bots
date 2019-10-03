@@ -37,7 +37,14 @@ describe('Starter Test', () => {
       expect(await page.title()).toBe('Slack | Spec Tester | Spec');
     }, TIMEOUT);
 
-    it('should test /test_dialog and verify the bot responds properly', async() => {
+    it('should test /test_modal and verify the bot responds properly', async() => {
+      // Execute /test_modal
+
+      // Fill in modal elements
+
+      // Submit Modal
+
+      // Validate Bot response
 
     });
 })
