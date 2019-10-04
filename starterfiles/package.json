@@ -6,7 +6,8 @@
     "test:starter": "jest test/functional/starter.test.js --runInBand",
     "test:slash_command": "jest test/functional/slash_command.test.js --runInBand",
     "test:modal": "jest test/functional/modal.test.js --runInBand",
-    "test:button": "jest test/functional/button.test.js --runInBand"
+    "test:button": "jest test/functional/button.test.js --runInBand",
+    "test:all": "jest --runInBand"
   },
   "author": "Elijah Sattler",
   "license": "ISC",

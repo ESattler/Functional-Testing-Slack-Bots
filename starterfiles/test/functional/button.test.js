@@ -30,8 +30,8 @@ describe('Starter Test', () => {
       await expect(page).toClick('button[id="signin_btn"]', { timeout: TIMEOUT });
 
       // Click on Bot in side bar
-      await page.waitForSelector('a[data-drag-id="DN68ND4JZ"]', { timeout: TIMEOUT });
-      await expect(page).toClick('a[data-drag-id="DN68ND4JZ"]', { timeout: TIMEOUT });
+      await page.waitForSelector(`a[data-qa-channel-sidebar-channel-id="${process.env.channel}"]`, { timeout: TIMEOUT });
+      await expect(page).toClick(`a[data-qa-channel-sidebar-channel-id="${process.env.channel}"]`, { timeout: TIMEOUT });
       
       // Verify Page Title
       expect(await page.title()).toBe('Slack | Spec Tester | Spec');
