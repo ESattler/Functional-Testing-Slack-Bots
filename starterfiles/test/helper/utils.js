@@ -3,7 +3,7 @@ const { WebClient } = require('@slack/web-api');
 async function getDMHistory() {
   const web = new WebClient(process.env.token);
   const response = await web.im.history({
-    channel: 'DN68ND4JZ',
+    channel: process.env.channel,
     count: 1000
   });
   return response.messages;
@@ -12,7 +12,7 @@ async function getDMHistory() {
 async function deleteMessage(ts) {
   const web = new WebClient(process.env.token);
   const response = await web.chat.delete({
-    channel: 'DN68ND4JZ',
+    channel: process.env.channel,
     ts
   }).catch(e => { });
 }
