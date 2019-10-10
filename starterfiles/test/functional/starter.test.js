@@ -19,7 +19,7 @@ describe('Starter Test', () => {
       await utils.cleanUp();
     })
   
-    it('should go to slack workspace and sign in', async () => {
+    it('should be titled "Slack | Spec Tester | Spec" after logging in and opening DMs', async () => {
       // Log in
       await page.goto('https://spec-test-conf.slack.com');
       await expect(page).toFill('input[id="email"]', process.env.email, { timeout: TIMEOUT });

@@ -22,7 +22,7 @@ describe('Starter Test', () => {
       await browser.close();
     });
   
-    it('should go to slack workspace and sign in', async () => {
+    it('should be titled "Slack | Spec Tester | Spec" after logging in and opening DMs', async () => {
       // Log in
       await page.goto('https://spec-test-conf.slack.com');
       await expect(page).toFill('input[id="email"]', process.env.email, { timeout: TIMEOUT });
@@ -37,7 +37,7 @@ describe('Starter Test', () => {
       expect(await page.title()).toBe('Slack | Spec Tester | Spec');
     }, TIMEOUT);
 
-    it('should test /test_button and verify the bot responds properly', async() => {
+    it('should return button after running /test_button and return proper response after clicking button', async() => {
       // Execute /test_button
       await expect(page).toFill('div[data-qa="message_input"]', '/test_button', { timeout: TIMEOUT });
       await page.keyboard.press('Enter');
