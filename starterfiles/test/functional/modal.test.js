@@ -22,9 +22,9 @@ describe('Starter Test', () => {
       await browser.close();
     });
   
-    it('should be titled "Slack | Spec Tester | Spec" after logging in and opening DMs', async () => {
+    it('should be titled "Slack | Spec Test Bot | Slack Community" after logging in and opening DMs', async () => {
       // Log in
-      await page.goto('https://spec-test-conf.slack.com');
+      await page.goto('https://community.slack.com');
       await expect(page).toFill('input[id="email"]', process.env.email, { timeout: TIMEOUT });
       await expect(page).toFill('input[id="password"]', process.env.password, { timeout: TIMEOUT });
       await expect(page).toClick('button[id="signin_btn"]', { timeout: TIMEOUT });
@@ -34,7 +34,7 @@ describe('Starter Test', () => {
       await expect(page).toClick(`a[data-qa-channel-sidebar-channel-id="${process.env.channel}"]`, { timeout: TIMEOUT });
       
       // Verify Page Title
-      expect(await page.title()).toBe('Slack | Spec Tester | Spec');
+      expect(await page.title()).toBe('Slack | Spec Test Bot | Slack Community');
     }, TIMEOUT);
 
     it('should return modal inputs after running /test_modal, filling it out and submitting', async() => {
