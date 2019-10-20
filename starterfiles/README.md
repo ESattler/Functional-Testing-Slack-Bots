@@ -34,3 +34,50 @@ npm run test:starter
 
 You should see chromium open up, navigate to the Slack sign in page, sign you in and then close the browser. 
 
+## 2. Tests
+
+### a. `slash_command.test.js`
+
+This test will test the bot's `/test_slash_command` slash command. It will log into Slack, open up DM's, execute the slash command and validate the bot's response.
+
+This test is provided to you completed as a reference. It can be executed with
+
+```
+npm run test:slash_command
+```
+
+### b. `button.test.js`
+
+This is the first test that you should work on completing. Currently it handles logging in and opening up the DMs with the bot. You will need to fill out
+
+- Executing `/test_button` slash command
+- Validating the bot's response
+- Clicking on the button the bot returns
+- Validating the bot's second response
+
+This test can be executed with
+
+```
+npm run test:button
+```
+
+### c. `modal.test.js`
+
+This is the second test you should complete. Currently it handles logging in and opening up the DMs with the bot. You will need to fill out
+
+- Executing `/test_modal` slash command
+- Filling out and submitting the modal that appears
+- Validating the bot's response
+
+## 3. Resources
+
+Here are several resources that can help when filling out these tests, as well as just learn more about the libraries you are using
+
+- [Puppeteer](https://github.com/GoogleChrome/puppeteer)
+  - [Full API Documentaiton](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md)
+
+- [Jest](https://jestjs.io/)
+
+- [Expect-Puppeteer](https://github.com/smooth-code/jest-puppeteer/tree/master/packages/expect-puppeteer)
+
+- [Jest-Puppeteer](https://github.com/smooth-code/jest-puppeteer)
