@@ -10,6 +10,7 @@ describe('Starter Test', () => {
       browser = await puppeteer.launch({
         headless: false,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        slowMo: 50
       });
       page = await browser.newPage();
     });
