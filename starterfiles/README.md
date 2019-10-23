@@ -7,32 +7,43 @@ To get started, you'll need both the latest versions of `node` and `npm` install
 ```
 npm install
 ```
-This should also take care of installing chromium for you which is needed by puppeteer.
+This should also take care of installing Chromium for you which is needed by puppeteer.
 
-Next, export your email/password to log into the Slack workspace. You will also need to export a slack bot token.
+Next, we'll need to set up some environment variables needed for the tests. You will need to update the `.env` file:
 ```
-export token=xoxb-XXXXX
-export email=ENTER_YOUR_NAME
-export password=ENTER_YOUR_PASSWORD
+email=
+password=
+token=
+channel=
 ```
 
-You will also need to export your channel ID for your DMs with the bot. To do this:
+Let's go through what these environment variables are for.
 
-1. Log into the Slack workspace
-2. Navigate to the `Apps` Section, type in `Spec Test Bot` and click on Spec Test Bot
-3. Next, right click on `Spec Test Bot` under the `Apps` section and copy the link.
-4. Paste it into some text field. You should see the URL end with `/messages/XXXXXX`
-5. Copy the end string and export it
-```
-export channel=XXXXX
-```
+- `email` & `password`
+  - This should be your actual login to the [Slack Community workspace](https://community.slack.com)
+    - **NOTE**: For the sake of this workshop, we are using our own actual account information. When actually implementing this with your own personal bots, the best practice would be to create a "service account" and use those credentials.
+- `token`
+  - This needs to be the bot token (xoxb-XXXX) for the bot we are testing against
+  - For this workshop, the bot token will be provided for you in the `#workshop-for-functional-testing`
+  - If you don't have access to the bot token, this will break the functionality of the `cleanUp` function, you can comment this out. Do note, cleaning up the DMs is important so consecutive runs don't give false positive for tests passing. You can manually delete the messages in your DM history with the bot.
+
+- `channel`
+  - The channel should be the channel ID for your DMs with the bot. You can get this by:
+    -  Log into the [Slack Community workspace](https://community.slack.com)
+    - Navigate to the `Apps` Section, type in `Spec Test Bot` and click on Spec Test Bot
+      - You can also search `Direct Messages` and start your direct message with the bot
+    - Next, right click on `Spec Test Bot` under the `Apps` section and copy the link.
+    - Paste it into some text field. You should see the URL end with `/messages/XXXXXX`
+    - Copy the end string and add it the .env file `token=XXXXXX`
 
 Then, you can run the starter file to validate your environment is set up correctly.
 ```
 npm run test:starter
 ```
 
-You should see chromium open up, navigate to the Slack sign in page, sign you in and then close the browser. 
+You should see chromium open up, navigate to the Slack sign in page, sign you in and then close the browser.
+
+If you are running this behind a proxy, you may see the test pass but hang forever. This is because the `cleanUp` function calls Slack APIs which might get stuck if it can't get through your proxy.
 
 ## 2. Tests
 
