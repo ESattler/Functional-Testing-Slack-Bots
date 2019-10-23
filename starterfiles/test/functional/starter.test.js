@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 require('expect-puppeteer');
+require('dotenv').config()
 const utils = require('../helper/utils');
 
 let page, browser;
